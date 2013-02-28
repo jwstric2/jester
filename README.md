@@ -1,4 +1,4 @@
 jester
 ======
 
-Java Implementation of Enrollment over Secure Transport
+Java Implementation of [http://tools.ietf.org/html/draft-ietf-pkix-est-05](Enrollment over Secure Transport).
