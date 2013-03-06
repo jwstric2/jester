@@ -9,13 +9,15 @@
     <artifactId>jester-servlet</artifactId>
     <packaging>war</packaging>
     <name>Jester Servlet</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/seize-the-dave/jester</url>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
+
     <build>
         <finalName>jester-servlet</finalName>
         <plugins>
