@@ -21,3 +21,9 @@ Related Documents
   - [Suite B Profile of Certificate Management over CMS](http://tools.ietf.org/html/rfc6403)
   - [HTTP Authentication: Basic and Digest Access Authentication](http://tools.ietf.org/html/rfc2617)
   - [The application/pkcs10 Media Type](http://tools.ietf.org/html/rfc5967)
+
+Out of Scope
+------------
+
+  - §3.3.3 - Certificate-less TLS Mutual Authentication (No RFC 5054 in JSSE)
+  - §3.5 - Linking Identity and PoP information (No RFC 5929 in JSSE)
