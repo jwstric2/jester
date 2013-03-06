@@ -10,7 +10,7 @@
     </modules>
     <packaging>pom</packaging>
 
-    <name>jester</name>
+    <name>Jester Parent</name>
     <url>http://maven.apache.org</url>
 
     <properties>

@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>jester-servlet</artifactId>
     <packaging>war</packaging>
-    <name>jester-servlet Maven Webapp</name>
+    <name>Jester Servlet</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
