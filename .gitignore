@@ -3,3 +3,4 @@ target/
 jester.iml
 jester-servlet/jester-servlet.iml
 jester-client/jester-client.iml
+jester-common/jester-common.iml
