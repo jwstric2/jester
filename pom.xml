@@ -8,6 +8,7 @@
     <modules>
         <module>jester-servlet</module>
         <module>jester-client</module>
+        <module>jester-common</module>
     </modules>
     <packaging>pom</packaging>
 
