@@ -21,7 +21,7 @@ public class ExplicitTrustAnchorTrustStrategyTest {
     public void testExtendedKeyUsage() throws Exception {
         X509Certificate cert = mock(X509Certificate.class);
         when(cert.getExtendedKeyUsage()).thenReturn(Collections.singletonList(ID_KP_CMCRA));
-        X509Certificate[] chain = new X509Certificate[] {cert};
+        X509Certificate[] chain = new X509Certificate[]{cert};
 
         CertificateTrustStrategy strategy = new ExplicitTrustAnchorTrustStrategy();
         assertTrue("Verifier should allow certificates with extended keyUsage of id_kp", strategy.isTrusted(chain, EMPTY));
@@ -29,7 +29,7 @@ public class ExplicitTrustAnchorTrustStrategyTest {
 
     @Test
     public void testExtendedKeyUsageEmptyCertificateChain() throws Exception {
-        X509Certificate[] chain = new X509Certificate[] {};
+        X509Certificate[] chain = new X509Certificate[]{};
 
         CertificateTrustStrategy strategy = new ExplicitTrustAnchorTrustStrategy();
         assertFalse("Verifier should not allow empty certificate chain", strategy.isTrusted(chain, EMPTY));
@@ -39,7 +39,7 @@ public class ExplicitTrustAnchorTrustStrategyTest {
     public void testExtendedKeyUsageMalformedX509Certificate() throws Exception {
         X509Certificate cert = mock(X509Certificate.class);
         when(cert.getExtendedKeyUsage()).thenThrow(new CertificateParsingException());
-        X509Certificate[] chain = new X509Certificate[] {cert};
+        X509Certificate[] chain = new X509Certificate[]{cert};
 
         CertificateTrustStrategy strategy = new ExplicitTrustAnchorTrustStrategy();
         assertFalse("Verifier should not allow malformed X509 certificates", strategy.isTrusted(chain, EMPTY));
