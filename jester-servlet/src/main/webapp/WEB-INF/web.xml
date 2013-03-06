@@ -10,31 +10,4 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    <servlet>
-        <servlet-name>default</servlet-name>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/CACerts</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/simpleEnroll</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/simpleReEnroll</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/fullCMC</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/serverKeyGen</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/CSRAttrs</url-pattern>
-    </servlet-mapping>
 </web-app>
