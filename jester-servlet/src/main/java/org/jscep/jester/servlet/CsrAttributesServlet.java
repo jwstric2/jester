@@ -1,7 +1,7 @@
 package org.jscep.jester.servlet;
 
 import org.apache.commons.codec.binary.Base64OutputStream;
-import org.jscep.jester.EntityMarshaller;
+import org.jscep.jester.io.EntityEncoder;
 import org.jscep.jester.EstMediator;
 
 import javax.inject.Inject;
@@ -19,12 +19,12 @@ public class CsrAttributesServlet extends HttpServlet {
     @Inject
     private EstMediator est;
     @Inject
-    private EntityMarshaller<List<String>> csrAttrMarshaller;
+    private EntityEncoder<List<String>> csrAttrMarshaller;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> attrs = est.getCsrAttributes();
         if (attrs.size() == 0) {
-            response.setStatus(204);
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 
             return;
         } else {
@@ -32,7 +32,7 @@ public class CsrAttributesServlet extends HttpServlet {
             response.setContentType("application/csrattrs");
 
             OutputStream out = new Base64OutputStream(response.getOutputStream());
-            csrAttrMarshaller.write(attrs, out);
+            csrAttrMarshaller.encode(attrs, out);
         }
     }
 }
