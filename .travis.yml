@@ -1,3 +1,4 @@
+install: mvn install -DskipTests=true -DskipITs=true
 language: java
 jdk:
   - openjdk7
