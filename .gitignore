@@ -1,1 +1,4 @@
 target/
+.idea
+jester.iml
+jester-servlet/jester-servlet.iml
