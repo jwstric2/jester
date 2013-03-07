@@ -6,7 +6,8 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jscep.jester.EstMediator;
-import org.jscep.jester.EstMediatorStubWithOneCsrAttribute;
+import org.jscep.jester.EstMediatorStubTemplate;
+import org.jscep.jester.io.CaDistributionEncoderStub;
 import org.jscep.jester.io.CsrAttributeEncoderStub;
 import org.jscep.jester.io.EntityEncoder;
 import org.junit.Test;
@@ -16,38 +17,26 @@ import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertArrayEquals;
+import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
 @RunWith(Arquillian.class)
-public class CsrAttributesServletOneObjectIdentifierTest {
+public class CaDistributionServletTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClass(CsrAttributesServlet.class)
-                .addClasses(EstMediator.class, EstMediatorStubWithOneCsrAttribute.class)
-                .addClasses(EntityEncoder.class, CsrAttributeEncoderStub.class);
+                .addClass(CaDistributionServlet.class)
+                .addClasses(EntityEncoder.class, CaDistributionEncoderStub.class)
+                .addClasses(EstMediator.class, EstMediatorStubTemplate.class);
     }
 
     @Inject
-    private CsrAttributesServlet servlet;
-
-    @Test
-    public void testTransferEncoding() throws IOException, ServletException {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-
-        ByteArrayOutputStream bOut = new ByteArrayOutputStream();
-        when(response.getOutputStream()).thenReturn(new ServletOutputStreamSpy(bOut));
-
-        servlet.doGet(request, response);
-        verify(response).setHeader("Content-Transfer-Encoding", "base64");
-    }
+    private CaDistributionServlet servlet;
 
     @Test
     public void testContentType() throws IOException, ServletException {
@@ -58,7 +47,21 @@ public class CsrAttributesServletOneObjectIdentifierTest {
         when(response.getOutputStream()).thenReturn(new ServletOutputStreamSpy(bOut));
 
         servlet.doGet(request, response);
-        verify(response).setContentType("application/csrattrs");
+
+        verify(response).setContentType(CaDistributionServlet.PKCS7_CERTS_ONLY);
+    }
+
+    @Test
+    public void testContentTransferEncoding() throws IOException, ServletException {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        ByteArrayOutputStream bOut = new ByteArrayOutputStream();
+        when(response.getOutputStream()).thenReturn(new ServletOutputStreamSpy(bOut));;
+
+        servlet.doGet(request, response);
+
+        verify(response).setHeader("Content-Transfer-Encoding", "base64");
     }
 
     @Test

@@ -5,6 +5,8 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jscep.jester.EstMediator;
+import org.jscep.jester.EstMediatorStubTemplate;
+import org.jscep.jester.io.CsrAttributeEncoderStub;
 import org.jscep.jester.io.EntityEncoder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +25,7 @@ public class CsrAttributesServletEmptyTest {
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
                 .addClass(CsrAttributesServlet.class)
-                .addClasses(EstMediator.class, EstMediatorWithEmptyCsrAttributes.class)
+                .addClasses(EstMediator.class, EstMediatorStubTemplate.class)
                 .addClasses(EntityEncoder.class, CsrAttributeEncoderStub.class);
     }
 

@@ -19,7 +19,7 @@ public class CsrAttributesServlet extends HttpServlet {
     @Inject
     private EstMediator est;
     @Inject
-    private EntityEncoder<List<String>> csrAttrMarshaller;
+    private EntityEncoder<List<String>> csrAttrEncoder;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> attrs = est.getCsrAttributes();
@@ -32,7 +32,7 @@ public class CsrAttributesServlet extends HttpServlet {
             response.setContentType("application/csrattrs");
 
             OutputStream out = new Base64OutputStream(response.getOutputStream());
-            csrAttrMarshaller.encode(attrs, out);
+            csrAttrEncoder.encode(attrs, out);
         }
     }
 }
