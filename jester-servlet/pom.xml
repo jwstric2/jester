@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>jester-servlet</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Jester Servlet</name>
     <url>https://github.com/seize-the-dave/jester</url>
 
@@ -28,11 +28,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk15on</artifactId>
-            <version>1.48</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
@@ -79,35 +74,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <finalName>jester-servlet</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.openejb.maven</groupId>
-                <artifactId>tomee-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <tomeeVersion>1.5.0</tomeeVersion>
-                    <tomeeClassifier>plus</tomeeClassifier>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>start-tomee</id>
-                        <goals>
-                            <goal>start</goal>
-                        </goals>
-                        <phase>pre-integration-test</phase>
-                    </execution>
-                    <execution>
-                        <id>stop-tomee</id>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                        <phase>post-integration-test</phase>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 </project>

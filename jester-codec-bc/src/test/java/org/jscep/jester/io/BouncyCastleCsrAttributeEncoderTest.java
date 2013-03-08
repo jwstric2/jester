@@ -1,12 +1,10 @@
 package org.jscep.jester.io;
 
-import org.apache.commons.codec.binary.Hex;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import static org.junit.Assert.*;

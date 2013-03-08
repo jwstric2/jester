@@ -4,3 +4,5 @@ jester.iml
 jester-servlet/jester-servlet.iml
 jester-client/jester-client.iml
 jester-common/jester-common.iml
+jester-codec-bc/jester-codec-bc.iml
+jester-sample-war/jester-sample-war.iml
