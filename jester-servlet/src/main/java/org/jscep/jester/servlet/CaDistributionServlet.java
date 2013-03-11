@@ -26,9 +26,7 @@ public class CaDistributionServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType(PKCS7_CERTS_ONLY);
-        response.setHeader("Content-Transfer-Encoding", "base64");
 
-        OutputStream out = new Base64OutputStream(response.getOutputStream());
-        certEncoder.encode(est.getCaCertificates(), out);
+        certEncoder.encode(est.getCaCertificates(), response.getOutputStream());
     }
 }

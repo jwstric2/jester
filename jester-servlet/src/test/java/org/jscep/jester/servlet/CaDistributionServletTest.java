@@ -52,19 +52,6 @@ public class CaDistributionServletTest {
     }
 
     @Test
-    public void testContentTransferEncoding() throws IOException, ServletException {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-
-        ByteArrayOutputStream bOut = new ByteArrayOutputStream();
-        when(response.getOutputStream()).thenReturn(new ServletOutputStreamSpy(bOut));;
-
-        servlet.doGet(request, response);
-
-        verify(response).setHeader("Content-Transfer-Encoding", "base64");
-    }
-
-    @Test
     public void testOutput() throws IOException, ServletException {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
@@ -73,7 +60,7 @@ public class CaDistributionServletTest {
         when(response.getOutputStream()).thenReturn(new ServletOutputStreamSpy(bOut));
 
         servlet.doGet(request, response);
-        byte[] actual = Base64.decodeBase64(bOut.toByteArray());
+        byte[] actual = bOut.toByteArray();
 
         assertArrayEquals(CsrAttributeEncoderStub.TEST_BYTES, actual);
     }

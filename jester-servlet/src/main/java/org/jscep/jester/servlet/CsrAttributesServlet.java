@@ -28,11 +28,9 @@ public class CsrAttributesServlet extends HttpServlet {
 
             return;
         } else {
-            response.setHeader("Content-Transfer-Encoding", "base64");
             response.setContentType("application/csrattrs");
 
-            OutputStream out = new Base64OutputStream(response.getOutputStream());
-            csrAttrEncoder.encode(attrs, out);
+            csrAttrEncoder.encode(attrs, response.getOutputStream());
         }
     }
 }
