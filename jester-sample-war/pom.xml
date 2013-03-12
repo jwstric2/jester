@@ -6,7 +6,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>jester-war</artifactId>
+    <artifactId>jester-sample-war</artifactId>
     <packaging>war</packaging>
     <name>Jester Sample WAR</name>
     <url>https://github.com/seize-the-dave/jester</url>
