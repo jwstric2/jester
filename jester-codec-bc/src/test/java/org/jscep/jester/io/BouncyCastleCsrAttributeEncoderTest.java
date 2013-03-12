@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class BouncyCastleCsrAttributeEncoderTest {
-    EntityEncoder<List<String>> encoder;
+    private EntityEncoder<List<String>> encoder;
 
     @Before
     public void setUp() {
