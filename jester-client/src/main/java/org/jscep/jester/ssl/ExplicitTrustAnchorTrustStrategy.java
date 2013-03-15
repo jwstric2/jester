@@ -4,7 +4,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
 public class ExplicitTrustAnchorTrustStrategy implements CertificateTrustStrategy {
-    public static final String ID_KP_CMCRA = "1.3.6.1.5.5.7.3.28";
+    protected static final String ID_KP_CMCRA = "1.3.6.1.5.5.7.3.28";
 
     public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
         if (chain.length == 0) {
