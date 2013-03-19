@@ -10,7 +10,7 @@
     <artifactId>jester-codec-bc</artifactId>
     <packaging>jar</packaging>
 
-    <name>Bouncy Castle Encoders and Decoders</name>
+    <name>Jester Codec :: Bouncy Castle</name>
     <url>https://github.com/seize-the-dave/jester</url>
 
     <properties>
