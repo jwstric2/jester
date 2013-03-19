@@ -4,11 +4,9 @@ import org.bouncycastle.asn1.ASN1Encodable;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.DERSequence;
 
-import javax.enterprise.inject.Default;
 import java.io.IOException;
 import java.io.OutputStream;
 
-@Default
 public class BouncyCastleCsrAttributeEncoder implements EntityEncoder<String[]> {
     public void encode(String[] attrs, OutputStream out) throws IOException {
         ASN1Encodable[] oids = new ASN1ObjectIdentifier[attrs.length];
