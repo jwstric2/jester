@@ -7,6 +7,7 @@ import org.bouncycastle.cms.CMSSignedData;
 import org.bouncycastle.cms.CMSSignedDataGenerator;
 import org.bouncycastle.util.Store;
 
+import javax.inject.Inject;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.cert.CertificateEncodingException;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 public class BouncyCastleSignedDataEncoder implements EntityEncoder<X509Certificate[]> {
     private final CMSSignedDataGenerator signedDataGenerator;
 
+    @Inject
     public BouncyCastleSignedDataEncoder(CMSSignedDataGenerator signedDataGenerator) {
         this.signedDataGenerator = signedDataGenerator;
     }
