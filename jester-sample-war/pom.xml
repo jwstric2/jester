@@ -32,7 +32,7 @@
     </dependencies>
 
     <build>
-        <finalName>jester-war</finalName>
+        <finalName>jester-sample-war</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.openejb.maven</groupId>

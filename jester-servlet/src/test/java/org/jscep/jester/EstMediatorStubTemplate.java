@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class EstMediatorStubTemplate implements EstMediator {
-    public List<X509Certificate> getCaCertificates() {
-        return Collections.emptyList();
+    public X509Certificate[] getCaCertificates() {
+        return new X509Certificate[0];
     }
 
-    public List<String> getCsrAttributes() {
-        return Collections.emptyList();
+    public String[] getCsrAttributes() {
+        return new String[0];
     }
 }

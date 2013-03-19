@@ -5,6 +5,6 @@ import java.security.cert.X509Certificate;
 import java.util.List;
 
 public interface EstMediator {
-    List<X509Certificate> getCaCertificates();
-    List<String> getCsrAttributes();
+    X509Certificate[] getCaCertificates();
+    String[] getCsrAttributes();
 }

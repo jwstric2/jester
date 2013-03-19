@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class BouncyCastleCsrAttributeEncoderTest {
-    private EntityEncoder<List<String>> encoder;
+    private EntityEncoder<String[]> encoder;
 
     @Before
     public void setUp() {
@@ -20,7 +20,7 @@ public class BouncyCastleCsrAttributeEncoderTest {
     @Test
     public void testEmptyList() throws IOException {
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
-        encoder.encode(Collections.<String>emptyList(), bOut);
+        encoder.encode(new String[0], bOut);
 
         byte[] actual = bOut.toByteArray();
         // Tag 0x30 Length 0x00
@@ -32,7 +32,7 @@ public class BouncyCastleCsrAttributeEncoderTest {
     @Test
     public void testSingletonList() throws IOException {
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
-        encoder.encode(Collections.singletonList("1.2"), bOut);
+        encoder.encode(new String[] {"1.2"}, bOut);
 
         byte[] actual = bOut.toByteArray();
         // Tag 0x30 Length 0x03

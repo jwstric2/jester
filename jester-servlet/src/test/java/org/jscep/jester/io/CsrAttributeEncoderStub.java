@@ -7,12 +7,12 @@ import java.io.OutputStream;
 import java.util.List;
 import static org.junit.Assert.*;
 
-public class CsrAttributeEncoderStub implements EntityEncoder<List<String>> {
+public class CsrAttributeEncoderStub implements EntityEncoder<String[]> {
     public static final byte[] TEST_BYTES = "jester".getBytes();
 
-    public void encode(List<String> entity, OutputStream out) throws IOException {
-        assertEquals(1, entity.size());
-        assertEquals("1.2", entity.get(0));
+    public void encode(String[] entity, OutputStream out) throws IOException {
+        assertEquals(1, entity.length);
+        assertEquals("1.2", entity[0]);
 
         out.write(TEST_BYTES);
     }

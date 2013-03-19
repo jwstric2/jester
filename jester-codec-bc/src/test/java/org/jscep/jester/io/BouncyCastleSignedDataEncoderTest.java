@@ -26,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class BouncyCastleSignedDataEncoderTest {
-    private EntityEncoder<List<X509Certificate>> encoder;
+    private EntityEncoder<X509Certificate[]> encoder;
 
     @Before
     public void setUp() {
@@ -37,7 +37,7 @@ public class BouncyCastleSignedDataEncoderTest {
     @Test
     public void testEmptyList() throws Exception {
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
-        encoder.encode(Collections.<X509Certificate>emptyList(), bOut);
+        encoder.encode(new X509Certificate[0], bOut);
 
         assertArrayEquals(Base64.decode("MIAGCSqGSIb3DQEHAqCAMIACAQExADCABgkqhkiG9w0BBwEAADEAAAAAAAAA"), bOut.toByteArray());
     }
@@ -45,12 +45,12 @@ public class BouncyCastleSignedDataEncoderTest {
     @Test(expected = IOException.class)
     public void testThrowCmsException() throws Exception {
         CMSSignedDataGenerator signedDataGenerator = mock(CMSSignedDataGenerator.class);
-        EntityEncoder<List<X509Certificate>> encoder = new BouncyCastleSignedDataEncoder(signedDataGenerator);
+        EntityEncoder<X509Certificate[]> encoder = new BouncyCastleSignedDataEncoder(signedDataGenerator);
 
         when(signedDataGenerator.generate(any(CMSTypedData.class))).thenThrow(new CMSException(""));
 
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
-        encoder.encode(Collections.<X509Certificate>emptyList(), bOut);
+        encoder.encode(new X509Certificate[0], bOut);
     }
 
     @Test
@@ -60,8 +60,7 @@ public class BouncyCastleSignedDataEncoderTest {
         keyStore.load(getClass().getResourceAsStream("/jester.jks"), password);
         X509Certificate cert = (X509Certificate) keyStore.getCertificate("mykey");
 
-        List<X509Certificate> certs = new ArrayList<X509Certificate>();
-        certs.add(cert);
+        X509Certificate[] certs = new X509Certificate[] {cert};
 
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
         encoder.encode(certs, bOut);

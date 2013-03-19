@@ -1,6 +1,5 @@
 package org.jscep.jester.servlet;
 
-import org.apache.commons.codec.binary.Base64OutputStream;
 import org.jscep.jester.EstMediator;
 import org.jscep.jester.io.EntityEncoder;
 
@@ -11,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.security.cert.X509Certificate;
-import java.util.List;
 
 @WebServlet(urlPatterns = {"/CACerts"})
 public class CaDistributionServlet extends HttpServlet {
@@ -22,11 +19,11 @@ public class CaDistributionServlet extends HttpServlet {
     @Inject
     private EstMediator est;
     @Inject
-    private EntityEncoder<List<X509Certificate>> certEncoder;
+    private EntityEncoder<X509Certificate[]> encoder;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType(PKCS7_CERTS_ONLY);
 
-        certEncoder.encode(est.getCaCertificates(), response.getOutputStream());
+        encoder.encode(est.getCaCertificates(), response.getOutputStream());
     }
 }

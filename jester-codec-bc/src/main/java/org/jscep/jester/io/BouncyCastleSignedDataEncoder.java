@@ -7,23 +7,24 @@ import org.bouncycastle.cms.CMSSignedData;
 import org.bouncycastle.cms.CMSSignedDataGenerator;
 import org.bouncycastle.util.Store;
 
+import javax.enterprise.inject.Default;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
-import java.util.List;
+import java.util.Arrays;
 
-public class BouncyCastleSignedDataEncoder implements EntityEncoder<List<X509Certificate>> {
+@Default
+public class BouncyCastleSignedDataEncoder implements EntityEncoder<X509Certificate[]> {
     private final CMSSignedDataGenerator signedDataGenerator;
 
     public BouncyCastleSignedDataEncoder(CMSSignedDataGenerator signedDataGenerator) {
         this.signedDataGenerator = signedDataGenerator;
     }
 
-    @Override
-    public void encode(List<X509Certificate> entity, OutputStream out) throws IOException {
+    public void encode(X509Certificate[] entity, OutputStream out) throws IOException {
         try {
-            Store store = new JcaCertStore(entity);
+            Store store = new JcaCertStore(Arrays.asList(entity));
             signedDataGenerator.addCertificates(store);
             CMSSignedData signedData = signedDataGenerator.generate(new CMSAbsentContent());
 
