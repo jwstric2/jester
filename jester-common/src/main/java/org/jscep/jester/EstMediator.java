@@ -7,4 +7,5 @@ import java.util.List;
 public interface EstMediator {
     X509Certificate[] getCaCertificates();
     String[] getCsrAttributes();
+    X509Certificate enroll(CertificationRequest csr);
 }

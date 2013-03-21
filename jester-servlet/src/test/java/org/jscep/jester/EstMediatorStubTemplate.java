@@ -12,4 +12,9 @@ public class EstMediatorStubTemplate implements EstMediator {
     public String[] getCsrAttributes() {
         return new String[0];
     }
+
+    @Override
+    public X509Certificate enroll(CertificationRequest csr) {
+        return null;
+    }
 }
