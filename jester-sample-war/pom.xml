@@ -30,35 +30,4 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <finalName>jester-sample-war</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.openejb.maven</groupId>
-                <artifactId>tomee-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <tomeeVersion>1.5.0</tomeeVersion>
-                    <tomeeClassifier>plus</tomeeClassifier>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>start-tomee</id>
-                        <goals>
-                            <goal>start</goal>
-                        </goals>
-                        <phase>pre-integration-test</phase>
-                    </execution>
-                    <execution>
-                        <id>stop-tomee</id>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                        <phase>post-integration-test</phase>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 </project>
