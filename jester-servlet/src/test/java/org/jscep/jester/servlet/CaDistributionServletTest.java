@@ -1,6 +1,5 @@
 package org.jscep.jester.servlet;
 
-import org.apache.commons.codec.binary.Base64;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -23,7 +22,6 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 @RunWith(Arquillian.class)
 public class CaDistributionServletTest {
@@ -48,7 +46,7 @@ public class CaDistributionServletTest {
 
         servlet.doGet(request, response);
 
-        verify(response).setContentType(CaDistributionServlet.PKCS7_CERTS_ONLY);
+        verify(response).setContentType(CaDistributionServlet.APPLICATION_PKCS7_MIME_SMIME_CERTS_ONLY);
     }
 
     @Test

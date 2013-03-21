@@ -13,6 +13,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/CSRAttrs"})
 public class CsrAttributesServlet extends HttpServlet {
+    public static final String APPLICATION_CSRATTRS = "application/csrattrs";
     @Inject
     private EstMediator est;
     @Inject
@@ -25,7 +26,7 @@ public class CsrAttributesServlet extends HttpServlet {
 
             return;
         } else {
-            response.setContentType("application/csrattrs");
+            response.setContentType(APPLICATION_CSRATTRS);
 
             encoder.encode(attrs, response.getOutputStream());
         }
