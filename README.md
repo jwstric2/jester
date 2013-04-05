@@ -1,7 +1,7 @@
 Jester
 ======
 
-Java Implementation of [Enrollment over Secure Transport](http://tools.ietf.org/html/draft-ietf-pkix-est-05).
+Java Implementation of [Enrollment over Secure Transport](http://tools.ietf.org/html/draft-ietf-pkix-est).
 
 [![Build Status](https://travis-ci.org/adaptive-logic/jester.png?branch=master)](https://travis-ci.org/adaptive-logic/jester)
 
