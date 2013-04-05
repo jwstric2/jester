@@ -3,7 +3,7 @@ Jester
 
 Java Implementation of [Enrollment over Secure Transport](http://tools.ietf.org/html/draft-ietf-pkix-est-05).
 
-[![Build Status](https://travis-ci.org/seize-the-dave/jester.png?branch=master)](https://travis-ci.org/seize-the-dave/jester)
+[![Build Status](https://travis-ci.org/adaptive-logic/jester.png?branch=master)](https://travis-ci.org/adaptive-logic/jester)
 
 Related Documents
 -----------------
