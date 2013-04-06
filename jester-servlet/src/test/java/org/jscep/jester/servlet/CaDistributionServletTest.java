@@ -1,5 +1,6 @@
 package org.jscep.jester.servlet;
 
+import org.apache.commons.codec.binary.Base64;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -47,6 +48,7 @@ public class CaDistributionServletTest {
         servlet.doGet(request, response);
 
         verify(response).setContentType(CaDistributionServlet.APPLICATION_PKCS7_MIME_SMIME_CERTS_ONLY);
+        verify(response).addHeader("Content-Transfer-Encoding", "base64");
     }
 
     @Test
@@ -60,6 +62,6 @@ public class CaDistributionServletTest {
         servlet.doGet(request, response);
         byte[] actual = bOut.toByteArray();
 
-        assertArrayEquals(CsrAttributeEncoderStub.TEST_BYTES, actual);
+        assertArrayEquals(Base64.encodeBase64(CaDistributionEncoderStub.TEST_BYTES), actual);
     }
 }

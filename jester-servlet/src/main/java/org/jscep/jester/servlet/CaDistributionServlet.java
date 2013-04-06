@@ -1,5 +1,6 @@
 package org.jscep.jester.servlet;
 
+import org.apache.commons.codec.binary.Base64OutputStream;
 import org.jscep.jester.EstMediator;
 import org.jscep.jester.io.EntityEncoder;
 
@@ -22,7 +23,8 @@ public class CaDistributionServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType(APPLICATION_PKCS7_MIME_SMIME_CERTS_ONLY);
+        response.addHeader("Content-Transfer-Encoding", "base64");
 
-        encoder.encode(est.getCaCertificates(), response.getOutputStream());
+        encoder.encode(est.getCaCertificates(), new Base64OutputStream(response.getOutputStream()));
     }
 }
