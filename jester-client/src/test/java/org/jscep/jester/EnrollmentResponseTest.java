@@ -1,5 +1,6 @@
 package org.jscep.jester;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -27,7 +28,7 @@ public class EnrollmentResponseTest {
 
     @Test
     public void testGetRetryDate() {
-        Date expected = new Date();
+        DateTime expected = new DateTime();
         EnrollmentResponse response = new EnrollmentResponse(expected);
 
         assertEquals(expected, response.getRetryDate());
@@ -35,7 +36,7 @@ public class EnrollmentResponseTest {
 
     @Test
     public void testGetRetryDateCertificateIsNull() {
-        Date expected = new Date();
+        DateTime expected = new DateTime();
         EnrollmentResponse response = new EnrollmentResponse(expected);
 
         assertNull(response.getCertificate());
