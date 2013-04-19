@@ -124,4 +124,15 @@ public class EstClientTest {
         X509Certificate actual = estClient.enroll(csr).getCertificate();
         assertEquals(expectedCert, actual);
     }
+
+    @Test
+    public void testRenew() throws Exception {
+        CertificationRequest csr = mock(CertificationRequest.class);
+        when(statusLine.getStatusCode()).thenReturn(200);
+        when(httpResponse.getFirstHeader(HttpHeaders.CONTENT_TYPE)).thenReturn(new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/pkcs7-mime"));
+        when(httpResponse.getFirstHeader("Content-Transfer-Encoding")).thenReturn(new BasicHeader("Content-Transfer-Encoding", "base64"));
+
+        X509Certificate actual = estClient.renew(csr).getCertificate();
+        assertEquals(expectedCert, actual);
+    }
 }
