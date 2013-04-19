@@ -121,7 +121,7 @@ public class EstClientTest {
         when(httpResponse.getFirstHeader(HttpHeaders.CONTENT_TYPE)).thenReturn(new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/pkcs7-mime"));
         when(httpResponse.getFirstHeader("Content-Transfer-Encoding")).thenReturn(new BasicHeader("Content-Transfer-Encoding", "base64"));
 
-        X509Certificate actual = estClient.enroll(csr);
+        X509Certificate actual = estClient.enroll(csr).getCertificate();
         assertEquals(expectedCert, actual);
     }
 }

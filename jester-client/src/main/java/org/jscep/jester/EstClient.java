@@ -74,15 +74,15 @@ public class EstClient {
         }
     }
 
-    public X509Certificate enroll(CertificationRequest csr) throws IOException {
+    public EnrollmentResponse enroll(CertificationRequest csr) throws IOException {
         return enroll(csr, SIMPLE_ENROLL);
     }
 
-    public X509Certificate renew(CertificationRequest csr) throws IOException {
+    public EnrollmentResponse renew(CertificationRequest csr) throws IOException {
         return enroll(csr, SIMPLE_RENEW);
     }
 
-    private X509Certificate enroll(CertificationRequest csr, String command) throws IOException {
+    private EnrollmentResponse enroll(CertificationRequest csr, String command) throws IOException {
         HttpPost post = new HttpPost("https://" + host + WELL_KNOWN_LOCATION + command);
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
         csrEncoder.encode(csr, new Base64OutputStream(bOut));
@@ -97,7 +97,7 @@ public class EstClient {
         HttpEntity entity = response.getEntity();
         X509Certificate[] certs = certDecoder.decode(new Base64InputStream(entity.getContent()));
 
-        return certs[0];
+        return new EnrollmentResponse(certs[0]);
     }
 
     private void checkContentType(HttpResponse response) throws EstProtocolException {
