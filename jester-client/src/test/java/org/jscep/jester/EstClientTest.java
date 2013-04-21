@@ -54,14 +54,6 @@ public class EstClientTest {
         when(httpClient.execute(any(HttpUriRequest.class))).thenReturn(httpResponse);
     }
 
-    @Test
-    public void testSSL() throws Exception {
-        SSLContext ctx = SSLContext.getInstance("TLS");
-        TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-        tmf.init((KeyStore) null);
-        System.out.println(Arrays.toString(tmf.getTrustManagers()));
-    }
-
     @Test(expected = EstProtocolException.class)
     public void testIncorrectStatusCode() throws Exception {
         assertArrayEquals(expectedCerts, estClient.obtainCaCertificates());
@@ -126,6 +118,17 @@ public class EstClientTest {
     }
 
     @Test
+    public void testEnroll202() throws Exception {
+        CertificationRequest csr = mock(CertificationRequest.class);
+        when(statusLine.getStatusCode()).thenReturn(202);
+        when(httpResponse.getFirstHeader(HttpHeaders.RETRY_AFTER)).thenReturn(new BasicHeader(HttpHeaders.RETRY_AFTER, "120"));
+
+        EnrollmentResponse enrollmentResponse = estClient.enroll(csr);
+        assertNull(enrollmentResponse.getCertificate());
+        assertNotNull(enrollmentResponse.getRetryDate());
+    }
+
+    @Test
     public void testRenew() throws Exception {
         CertificationRequest csr = mock(CertificationRequest.class);
         when(statusLine.getStatusCode()).thenReturn(200);
@@ -134,5 +137,16 @@ public class EstClientTest {
 
         X509Certificate actual = estClient.renew(csr).getCertificate();
         assertEquals(expectedCert, actual);
+    }
+
+    @Test
+    public void testRenew202() throws Exception {
+        CertificationRequest csr = mock(CertificationRequest.class);
+        when(statusLine.getStatusCode()).thenReturn(202);
+        when(httpResponse.getFirstHeader(HttpHeaders.RETRY_AFTER)).thenReturn(new BasicHeader(HttpHeaders.RETRY_AFTER, "120"));
+
+        EnrollmentResponse enrollmentResponse = estClient.renew(csr);
+        assertNull(enrollmentResponse.getCertificate());
+        assertNotNull(enrollmentResponse.getRetryDate());
     }
 }

@@ -7,6 +7,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
+import org.jscep.jester.http.RetryAfterParser;
 import org.jscep.jester.io.EntityDecoder;
 import org.jscep.jester.io.EntityEncoder;
 import org.slf4j.Logger;
@@ -62,8 +63,8 @@ public class EstClient {
     }
 
     private void checkStatusCode(int actual, int... expected) throws EstProtocolException {
-        if (Arrays.binarySearch(expected, actual) > 0) {
-            throw new EstProtocolException("Status code should be in " + Arrays.toString(expected));
+        if (Arrays.binarySearch(expected, actual) < 0) {
+            throw new EstProtocolException("Status code should be in " + Arrays.toString(expected) + "; was " + actual);
         }
     }
 
@@ -91,13 +92,18 @@ public class EstClient {
 
         int statusCode = response.getStatusLine().getStatusCode();
         checkStatusCode(statusCode, 200, 202);
-        checkContentType(response);
-        checkContentTransferEncoding(response);
+        if (statusCode == 200) {
+            checkContentType(response);
+            checkContentTransferEncoding(response);
 
-        HttpEntity entity = response.getEntity();
-        X509Certificate[] certs = certDecoder.decode(new Base64InputStream(entity.getContent()));
+            HttpEntity entity = response.getEntity();
+            X509Certificate[] certs = certDecoder.decode(new Base64InputStream(entity.getContent()));
 
-        return new EnrollmentResponse(certs[0]);
+            return new EnrollmentResponse(certs[0]);
+        } else {
+            String retryAfter = response.getFirstHeader("Retry-After").getValue();
+            return new EnrollmentResponse(RetryAfterParser.parse(retryAfter));
+        }
     }
 
     private void checkContentType(HttpResponse response) throws EstProtocolException {
