@@ -1,9 +1,7 @@
-Jester
+Jester [![Build Status](https://travis-ci.org/jscep/jester.png?branch=master)](https://travis-ci.org/jscep/jester)
 ======
 
 Java Implementation of [Enrollment over Secure Transport](http://www.rfc-editor.org/rfc/rfc7030.txt).
-
-[![Build Status](https://travis-ci.org/jscep/jester.png?branch=master)](https://travis-ci.org/jscep/jester)
 
 Related Documents
 -----------------
