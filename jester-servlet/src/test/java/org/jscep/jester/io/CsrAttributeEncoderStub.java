@@ -7,10 +7,10 @@ import java.io.OutputStream;
 import java.util.List;
 import static org.junit.Assert.*;
 
-public class CsrAttributeEncoderStub implements EntityEncoder<String[]> {
+public class CsrAttributeEncoderStub implements EntityEncoder<String> {
     public static final byte[] TEST_BYTES = "jester".getBytes();
 
-    public void encode(String[] entity, OutputStream out) throws IOException {
+    public void encode(OutputStream out, String... entity) throws IOException {
         assertEquals(1, entity.length);
         assertEquals("1.2", entity[0]);
 

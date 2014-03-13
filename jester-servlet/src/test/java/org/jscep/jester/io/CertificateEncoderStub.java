@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class CertificateEncoderStub implements EntityEncoder<X509Certificate> {
     public static final byte[] TEST_BYTES = "jester".getBytes();
 
-    public void encode(X509Certificate entity, OutputStream out) throws IOException {
+    public void encode(OutputStream out, X509Certificate... entity) throws IOException {
         out.write(TEST_BYTES);
     }
 }

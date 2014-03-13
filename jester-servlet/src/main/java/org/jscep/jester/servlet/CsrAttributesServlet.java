@@ -17,7 +17,7 @@ public class CsrAttributesServlet extends HttpServlet {
     @Inject
     private EstMediator est;
     @Inject
-    private EntityEncoder<String[]> encoder;
+    private EntityEncoder<String> encoder;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[] attrs = est.getCsrAttributes();
@@ -28,7 +28,7 @@ public class CsrAttributesServlet extends HttpServlet {
         } else {
             response.setContentType(APPLICATION_CSRATTRS);
 
-            encoder.encode(attrs, response.getOutputStream());
+            encoder.encode(response.getOutputStream(), attrs);
         }
     }
 }

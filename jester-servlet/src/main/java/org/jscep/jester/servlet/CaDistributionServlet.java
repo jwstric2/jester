@@ -19,12 +19,12 @@ public class CaDistributionServlet extends HttpServlet {
     @Inject
     private EstMediator est;
     @Inject
-    private EntityEncoder<X509Certificate[]> encoder;
+    private EntityEncoder<X509Certificate> encoder;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType(APPLICATION_PKCS7_MIME_SMIME_CERTS_ONLY);
         response.addHeader("Content-Transfer-Encoding", "base64");
 
-        encoder.encode(est.getCaCertificates(), new Base64OutputStream(response.getOutputStream()));
+        encoder.encode(new Base64OutputStream(response.getOutputStream()), est.getCaCertificates());
     }
 }

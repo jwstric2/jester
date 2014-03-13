@@ -7,8 +7,8 @@ import org.bouncycastle.asn1.DERSequence;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class BouncyCastleCsrAttributeEncoder implements EntityEncoder<String[]> {
-    public void encode(String[] attrs, OutputStream out) throws IOException {
+public class BouncyCastleCsrAttributeEncoder implements EntityEncoder<String> {
+    public void encode(OutputStream out, String... attrs) throws IOException {
         ASN1Encodable[] oids = new ASN1ObjectIdentifier[attrs.length];
         for (int i = 0; i < attrs.length; i++) {
             oids[i] = new ASN1ObjectIdentifier(attrs[i]);

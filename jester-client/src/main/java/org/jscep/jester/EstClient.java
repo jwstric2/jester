@@ -86,7 +86,7 @@ public class EstClient {
     private EnrollmentResponse enroll(CertificationRequest csr, String command) throws IOException {
         HttpPost post = new HttpPost("https://" + host + WELL_KNOWN_LOCATION + command);
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
-        csrEncoder.encode(csr, new Base64OutputStream(bOut));
+        csrEncoder.encode(new Base64OutputStream(bOut), csr);
         post.setEntity(new ByteArrayEntity(bOut.toByteArray()));
         HttpResponse response = httpClient.execute(post);
 

@@ -6,10 +6,10 @@ import java.security.cert.X509Certificate;
 import java.util.List;
 import static org.junit.Assert.*;
 
-public class CaDistributionEncoderStub implements EntityEncoder<X509Certificate[]> {
+public class CaDistributionEncoderStub implements EntityEncoder<X509Certificate> {
     public static final byte[] TEST_BYTES = "jester".getBytes();
 
-    public void encode(X509Certificate[] entity, OutputStream out) throws IOException {
+    public void encode(OutputStream out, X509Certificate... entity) throws IOException {
         assertEquals(0, entity.length);
 
         out.write(TEST_BYTES);

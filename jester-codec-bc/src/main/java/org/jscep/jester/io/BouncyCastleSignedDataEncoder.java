@@ -14,7 +14,7 @@ import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
-public class BouncyCastleSignedDataEncoder implements EntityEncoder<X509Certificate[]> {
+public class BouncyCastleSignedDataEncoder implements EntityEncoder<X509Certificate> {
     private final CMSSignedDataGenerator signedDataGenerator;
 
     @Inject
@@ -22,7 +22,7 @@ public class BouncyCastleSignedDataEncoder implements EntityEncoder<X509Certific
         this.signedDataGenerator = signedDataGenerator;
     }
 
-    public void encode(X509Certificate[] entity, OutputStream out) throws IOException {
+    public void encode(OutputStream out, X509Certificate... entity) throws IOException {
         try {
             Store store = new JcaCertStore(Arrays.asList(entity));
             signedDataGenerator.addCertificates(store);

@@ -29,7 +29,7 @@ public class EnrollmentServlet extends HttpServlet {
         try {
             response.setContentType(APPLICATION_PKCS7_MIME_SMIME_CERTS_ONLY);
             X509Certificate certificate = est.enroll(csr);
-            encoder.encode(certificate, response.getOutputStream());
+            encoder.encode(response.getOutputStream(), certificate);
 
         } catch (IOException e) {
             response.sendError(500);
