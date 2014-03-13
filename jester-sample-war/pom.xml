@@ -45,8 +45,8 @@
 				<configuration>
 					<webApp>
 						<contextPath>/${project.build.finalName}</contextPath>
+                        <jettyEnvXml>src/main/webapp/WEB-INF/jetty-env.xml</jettyEnvXml>
 					</webApp>
-					<jettyEnvXml>src/main/webapp/WEB-INF/jetty-env.xml</jettyEnvXml>
 					<contextXml>src/main/webapp/WEB-INF/jetty-context.xml</contextXml>
 				</configuration>
 			</plugin>
