@@ -6,4 +6,8 @@
             <Item>-org.eclipse.jetty.servlet.ServletContextHandler.Decorator</Item>
         </Array>
     </Set>
+    <Call name="setAttribute">
+        <Arg>org.eclipse.jetty.server.webapp.WebInfIncludeJarPattern</Arg>
+        <Arg>.*/jester-servlet-.*.jar$</Arg>
+    </Call>
 </Configure>
