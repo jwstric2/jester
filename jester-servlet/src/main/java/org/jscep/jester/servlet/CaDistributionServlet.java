@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.cert.X509Certificate;
 
-@WebServlet(urlPatterns = {"/CACerts"})
+@WebServlet(urlPatterns = {"/cacerts"})
 public class CaDistributionServlet extends HttpServlet {
     public static final String APPLICATION_PKCS7_MIME_SMIME_CERTS_ONLY = "application/pkcs7-mime;smime-type=certs-only";
     @Inject

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/CSRAttrs"})
+@WebServlet(urlPatterns = {"/csrattrs"})
 public class CsrAttributesServlet extends HttpServlet {
     public static final String APPLICATION_CSRATTRS = "application/csrattrs";
     @Inject
