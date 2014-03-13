@@ -19,7 +19,7 @@ cd jester-sample-war
 mvn org.eclipse.jetty:jetty-maven-plugin:run
 ```
 
-You should now have a functioning EST server at:  http://localhost:8080/.well-known/est/.
+You should now have a functioning EST server at: [http://localhost:8080/.well-known/est/](http://localhost:8080/.well-known/est/).
 
 Related Documents
 -----------------
