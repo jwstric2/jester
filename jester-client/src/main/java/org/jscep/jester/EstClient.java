@@ -22,9 +22,9 @@ import java.util.Arrays;
 public class EstClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(EstClient.class);
     public static final String WELL_KNOWN_LOCATION = "/.well-known/est";
-    private static final String CA_CERTIFICATES_DISTRIBUTION = "/CACerts";
-    private static final String SIMPLE_ENROLL = "/simpleEnroll";
-    private static final String SIMPLE_RENEW = "/simpleReEnroll";
+    private static final String CA_CERTIFICATES_DISTRIBUTION = "/cacerts";
+    private static final String SIMPLE_ENROLL = "/simpleenroll";
+    private static final String SIMPLE_RENEW = "/simplereenroll";
     private String host;
     private HttpClient httpClient;
     private EntityDecoder<X509Certificate[]> certDecoder;
