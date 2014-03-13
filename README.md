@@ -16,7 +16,7 @@ You can start the Jester server like so:
 ```bash
 mvn clean install
 cd jester-sample-war
-mvn org.eclipse.jetty:jetty-maven-plugin:run
+mvn jetty:run
 ```
 
 You should now have a functioning EST server at: [http://localhost:8080/.well-known/est/](http://localhost:8080/.well-known/est/).
