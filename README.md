@@ -3,6 +3,11 @@ Jester [![Build Status](https://travis-ci.org/jscep/jester.png?branch=master)](h
 
 Java Implementation of [Enrollment over Secure Transport](http://www.rfc-editor.org/rfc/rfc7030.txt).
 
+Requirements
+------------
+
+* Java 7
+
 Related Documents
 -----------------
 
