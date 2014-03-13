@@ -8,6 +8,19 @@ Requirements
 
 * Java 7
 
+Running Jester
+--------------
+
+You can start the Jester server like so:
+
+```bash
+mvn clean install
+cd jester-sample-war
+mvn org.eclipse.jetty:jetty-maven-plugin:run
+```
+
+You should now have a functioning EST server at:  http://localhost:8080/.well-known/est/.
+
 Related Documents
 -----------------
 
