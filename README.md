@@ -19,7 +19,7 @@ cd jester-sample-war
 mvn jetty:run
 ```
 
-You should now have a functioning EST server at: [http://localhost:8080/.well-known/est/](http://localhost:8080/.well-known/est/).
+You should now have a functioning EST server at: [http://localhost:8080/.well-known/est/](http://localhost:8080/.well-known/est/) and should be able to download the CA store at [http://localhost:8080/.well-known/est/cacerts](http://localhost:8080/.well-known/est/cacerts).
 
 Related Documents
 -----------------
