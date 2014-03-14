@@ -1,7 +1,7 @@
 Jester [![Build Status](https://travis-ci.org/jscep/jester.png?branch=master)](https://travis-ci.org/jscep/jester)
 ======
 
-Java Implementation of [Enrollment over Secure Transport](http://tools.ietf.org/html/rfc7030).
+Jester is an open source Java implementation of [Enrollment over Secure Transport](http://tools.ietf.org/html/rfc7030) (RFC 7030).
 
 Requirements
 ------------
