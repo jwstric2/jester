@@ -19,12 +19,44 @@ cd jester-sample-war
 mvn jetty:run
 ```
 
-You should now have a functioning EST server at: [http://localhost:8080/.well-known/est/](http://localhost:8080/.well-known/est/) and should be able to download the CA store at [http://localhost:8080/.well-known/est/cacerts](http://localhost:8080/.well-known/est/cacerts), e.g.
+You should now have a functioning EST server at: [http://localhost:8080/.well-known/est/](http://localhost:8080/.well-known/est/).
+
+Using OpenSSL
+-------------
+
+You should be able to download the CA store at [http://localhost:8080/.well-known/est/cacerts](http://localhost:8080/.well-known/est/cacerts) and parse it with OpenSSL, like so:
 
 ```bash
-curl --silent http://localhost:8080/.well-known/est/cacerts \
+$ curl --silent http://localhost:8080/.well-known/est/cacerts \
   | base64 --decode \
   | openssl pkcs7 -inform DER -print_certs
+```
+
+The above command will typically produce the following content:
+
+```
+subject=/C=Unknown/ST=Unknown/L=Unknown/O=Unknown/OU=Unknown/CN=Jester
+issuer=/C=Unknown/ST=Unknown/L=Unknown/O=Unknown/OU=Unknown/CN=Jester
+-----BEGIN CERTIFICATE-----
+MIIDMjCCAvCgAwIBAgIEE7xPBTALBgcqhkjOOAQDBQAwazEQMA4GA1UEBhMHVW5r
+bm93bjEQMA4GA1UECBMHVW5rbm93bjEQMA4GA1UEBxMHVW5rbm93bjEQMA4GA1UE
+ChMHVW5rbm93bjEQMA4GA1UECxMHVW5rbm93bjEPMA0GA1UEAxMGSmVzdGVyMB4X
+DTEzMDMwNTE2MzIzNFoXDTIzMDMwMzE2MzIzNFowazEQMA4GA1UEBhMHVW5rbm93
+bjEQMA4GA1UECBMHVW5rbm93bjEQMA4GA1UEBxMHVW5rbm93bjEQMA4GA1UEChMH
+VW5rbm93bjEQMA4GA1UECxMHVW5rbm93bjEPMA0GA1UEAxMGSmVzdGVyMIIBtzCC
+ASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9EAMMeP4C2
+USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f6AR7ECLC
+T7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv8iIDGZ3R
+SAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtcNrhXuXmU
+r7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwkyjMim4TwW
+eotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/hWuWfBpKL
+Zl6Ae1UlZAFMO/7PSSoDgYQAAoGAf825OevadfjDgljqZIk68NLt7ImHwwKjLXx5
+XbziLVO1zAgZ8Tn5c625Wcl7JFk+aZ6R7w8bu7mZ22v+/rpTyoIktkpoBstHOZhy
+y8sCj5js9vtVto9btNipwKjcxKSiLo6RPbHoJgNO9EInEY2ssZnHa+JqNFtZM6L5
+j1Lyk4ujITAfMB0GA1UdDgQWBBQe9oFQ5h7ECde2C92KzQoPa/+KiTALBgcqhkjO
+OAQDBQADLwAwLAIUXgy3MvGdAJYCwK0/Z8sehGwZ6a4CFDoBLnTz7hashYRY4Ttc
+iV7Vefqz
+-----END CERTIFICATE-----
 ```
 
 Related Documents
