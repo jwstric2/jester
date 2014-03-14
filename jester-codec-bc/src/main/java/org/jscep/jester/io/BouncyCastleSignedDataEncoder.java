@@ -8,6 +8,7 @@ import org.bouncycastle.cms.CMSSignedDataGenerator;
 import org.bouncycastle.util.Store;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.cert.CertificateEncodingException;
@@ -15,14 +16,15 @@ import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
 public class BouncyCastleSignedDataEncoder implements EntityEncoder<X509Certificate> {
-    private final CMSSignedDataGenerator signedDataGenerator;
+    private final Provider<CMSSignedDataGenerator> sdGeneratorProvider;
 
     @Inject
-    public BouncyCastleSignedDataEncoder(CMSSignedDataGenerator signedDataGenerator) {
-        this.signedDataGenerator = signedDataGenerator;
+    public BouncyCastleSignedDataEncoder(Provider<CMSSignedDataGenerator> sdGeneratorProvider) {
+        this.sdGeneratorProvider = sdGeneratorProvider;
     }
 
     public void encode(OutputStream out, X509Certificate... entity) throws IOException {
+        CMSSignedDataGenerator signedDataGenerator = sdGeneratorProvider.get();
         try {
             Store store = new JcaCertStore(Arrays.asList(entity));
             signedDataGenerator.addCertificates(store);

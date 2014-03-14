@@ -25,6 +25,9 @@ public class CaDistributionServlet extends HttpServlet {
         response.setContentType(APPLICATION_PKCS7_MIME_SMIME_CERTS_ONLY);
         response.addHeader("Content-Transfer-Encoding", "base64");
 
-        encoder.encode(new Base64OutputStream(response.getOutputStream()), est.getCaCertificates());
+        Base64OutputStream bOut = new Base64OutputStream(response.getOutputStream());
+        encoder.encode(bOut, est.getCaCertificates());
+        bOut.flush();
+        bOut.close();
     }
 }

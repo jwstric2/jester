@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.mockito.Mockito.*;
@@ -62,6 +63,6 @@ public class CaDistributionServletTest {
         servlet.doGet(request, response);
         byte[] actual = bOut.toByteArray();
 
-        assertArrayEquals(Base64.encodeBase64(CaDistributionEncoderStub.TEST_BYTES), actual);
+        assertArrayEquals(Base64.encodeBase64Chunked(CaDistributionEncoderStub.TEST_BYTES), actual);
     }
 }

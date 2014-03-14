@@ -11,6 +11,7 @@ import org.bouncycastle.util.encoders.Base64;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.inject.Provider;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.KeyStore;
@@ -30,8 +31,12 @@ public class BouncyCastleSignedDataEncoderTest {
 
     @Before
     public void setUp() {
-        CMSSignedDataGenerator signedDataGenerator = new CMSSignedDataGenerator();
-        encoder = new BouncyCastleSignedDataEncoder(signedDataGenerator);
+        Provider<CMSSignedDataGenerator> signedDataGeneratorProvider = new Provider<CMSSignedDataGenerator>() {
+            public CMSSignedDataGenerator get() {
+                return new CMSSignedDataGenerator();
+            }
+        };
+        encoder = new BouncyCastleSignedDataEncoder(signedDataGeneratorProvider);
     }
 
     @Test
@@ -44,10 +49,12 @@ public class BouncyCastleSignedDataEncoderTest {
 
     @Test(expected = IOException.class)
     public void testThrowCmsException() throws Exception {
+        Provider<CMSSignedDataGenerator> signedDataGeneratorProvider = mock(Provider.class);
         CMSSignedDataGenerator signedDataGenerator = mock(CMSSignedDataGenerator.class);
-        EntityEncoder<X509Certificate> encoder = new BouncyCastleSignedDataEncoder(signedDataGenerator);
-
+        when(signedDataGeneratorProvider.get()).thenReturn(signedDataGenerator);
         when(signedDataGenerator.generate(any(CMSTypedData.class))).thenThrow(new CMSException(""));
+        
+        EntityEncoder<X509Certificate> encoder = new BouncyCastleSignedDataEncoder(signedDataGeneratorProvider);
 
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
         encoder.encode(bOut, new X509Certificate[0]);
