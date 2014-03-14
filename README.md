@@ -32,7 +32,7 @@ $ curl --silent http://localhost:8080/.well-known/est/cacerts \
   | openssl pkcs7 -inform DER -print_certs
 ```
 
-The above command will typically produce the following content:
+The above command will typically produce the following output:
 
 ```
 subject=/C=Unknown/ST=Unknown/L=Unknown/O=Unknown/OU=Unknown/CN=Jester
