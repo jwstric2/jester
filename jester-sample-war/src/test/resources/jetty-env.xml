@@ -13,4 +13,9 @@
             </New>
         </Arg>
     </New>
+    <New id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory">
+        <Set name="keyStorePath">src/test/resources/jetty.jks</Set>
+        <Set name="keyStorePassword">storepwd</Set>
+        <Set name="protocol">TLSv1</Set>
+    </New>
 </Configure>
