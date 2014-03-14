@@ -15,14 +15,14 @@ import java.security.cert.X509Certificate;
 
 @WebServlet(urlPatterns = {"/cacerts"})
 public class CaDistributionServlet extends HttpServlet {
-    public static final String APPLICATION_PKCS7_MIME_SMIME_CERTS_ONLY = "application/pkcs7-mime;smime-type=certs-only";
+    public static final String APPLICATION_PKCS7_MIME = "application/pkcs7-mime";
     @Inject
     private EstMediator est;
     @Inject
     private EntityEncoder<X509Certificate> encoder;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType(APPLICATION_PKCS7_MIME_SMIME_CERTS_ONLY);
+        response.setContentType(APPLICATION_PKCS7_MIME);
         response.addHeader("Content-Transfer-Encoding", "base64");
 
         Base64OutputStream bOut = new Base64OutputStream(response.getOutputStream());

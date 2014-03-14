@@ -8,7 +8,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jscep.jester.EstMediator;
 import org.jscep.jester.EstMediatorStubTemplate;
 import org.jscep.jester.io.CaDistributionEncoderStub;
-import org.jscep.jester.io.CsrAttributeEncoderStub;
 import org.jscep.jester.io.EntityEncoder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.mockito.Mockito.*;
@@ -48,7 +46,7 @@ public class CaDistributionServletTest {
 
         servlet.doGet(request, response);
 
-        verify(response).setContentType(CaDistributionServlet.APPLICATION_PKCS7_MIME_SMIME_CERTS_ONLY);
+        verify(response).setContentType(CaDistributionServlet.APPLICATION_PKCS7_MIME);
         verify(response).addHeader("Content-Transfer-Encoding", "base64");
     }
 
