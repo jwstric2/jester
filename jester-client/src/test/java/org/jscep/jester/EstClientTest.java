@@ -28,11 +28,7 @@ public class EstClientTest {
 
     private EstClient estClient;
     private X509Certificate[] expectedCerts;
-    private HttpClient httpClient;
     private HttpResponse httpResponse;
-    private HttpEntity httpEntity;
-    private EntityDecoder<X509Certificate[]> certDecoder;
-    private EntityEncoder<CertificationRequest> csrEncoder;
     private StatusLine statusLine;
     private X509Certificate expectedCert;
 
@@ -40,11 +36,11 @@ public class EstClientTest {
     public void setUp() throws Exception {
         expectedCert = mock(X509Certificate.class);
         expectedCerts = new X509Certificate[] {expectedCert};
-        certDecoder = mock(EntityDecoder.class);
-        csrEncoder = mock(EntityEncoder.class);
-        httpClient = mock(HttpClient.class);
+        EntityDecoder<X509Certificate[]> certDecoder = mock(EntityDecoder.class);
+        EntityEncoder<CertificationRequest> csrEncoder = mock(EntityEncoder.class);
+        HttpClient httpClient = mock(HttpClient.class);
         httpResponse = mock(HttpResponse.class);
-        httpEntity = mock(HttpEntity.class);
+        HttpEntity httpEntity = mock(HttpEntity.class);
         statusLine = mock(StatusLine.class);
         estClient = new EstClient(httpClient, certDecoder, csrEncoder, "www.example.com");
 
