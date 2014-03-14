@@ -22,7 +22,9 @@ mvn jetty:run
 You should now have a functioning EST server at: [http://localhost:8080/.well-known/est/](http://localhost:8080/.well-known/est/) and should be able to download the CA store at [http://localhost:8080/.well-known/est/cacerts](http://localhost:8080/.well-known/est/cacerts), e.g.
 
 ```bash
-curl http://localhost:8080/.well-known/est/cacerts | base64 --decode | openssl pkcs7 -inform DER -text
+curl --silent http://localhost:8080/.well-known/est/cacerts \
+  | base64 --decode \
+  | openssl pkcs7 -inform DER -print_certs
 ```
 
 Related Documents
