@@ -19,17 +19,17 @@ cd jester-sample-war
 mvn jetty:run
 ```
 
-You should now have a functioning EST server at: [http://localhost:8080/.well-known/est/](http://localhost:8080/.well-known/est/).
+You should now have a functioning EST server at: [https://localhost:8443/.well-known/est/](http://localhost:8080/.well-known/est/).
 
 Using OpenSSL
 -------------
 
-You should be able to download the CA store at [http://localhost:8080/.well-known/est/cacerts](http://localhost:8080/.well-known/est/cacerts) and parse it with OpenSSL, like so:
+You should be able to download the CA store at [https://localhost:8443/.well-known/est/cacerts](http://localhost:8080/.well-known/est/cacerts) and parse it with OpenSSL, like so:
 
 ```bash
-$ curl --silent http://localhost:8080/.well-known/est/cacerts \
+curl --insecure --silent https://localhost:8443/.well-known/est/cacerts \
   | base64 --decode \
-  | openssl pkcs7 -inform DER -print_certs
+  | openssl pkcs7 -inform DER -print_certs -text -noout
 ```
 
 The above command will typically produce the following output:
