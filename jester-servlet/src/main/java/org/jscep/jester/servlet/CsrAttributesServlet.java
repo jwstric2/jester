@@ -24,7 +24,6 @@ public class CsrAttributesServlet extends HttpServlet {
         if (attrs.length == 0) {
             response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 
-            return;
         } else {
             response.setContentType(APPLICATION_CSRATTRS);
 

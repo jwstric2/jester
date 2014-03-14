@@ -36,7 +36,6 @@ public class EnrollmentServlet extends HttpServlet {
             response.getWriter().write(e.getMessage());
             response.getWriter().close();
 
-            return;
         }
 
         // 202
