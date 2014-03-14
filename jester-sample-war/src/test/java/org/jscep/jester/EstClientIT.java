@@ -34,7 +34,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class EstClientIT {
     @Test
-    public void testObtainCaCertificates() throws IOException, EstProtocolException, Exception {
+    public void testObtainCaCertificates() throws IOException, Exception {
         HttpClient httpClient = getNewHttpClient();
         EstClient estClient = new EstClient(httpClient, new BouncyCastleSignedDataDecoder(), new EntityEncoder<CertificationRequest>() {
             @Override

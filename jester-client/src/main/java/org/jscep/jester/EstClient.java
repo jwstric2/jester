@@ -47,7 +47,7 @@ public class EstClient {
         this.trustStore = explicitCaDatabase;
     }
 
-    public X509Certificate[] obtainCaCertificates() throws IOException, EstProtocolException {
+    public X509Certificate[] obtainCaCertificates() throws IOException {
         HttpGet get = new HttpGet("https://" + host + WELL_KNOWN_LOCATION + CA_CERTIFICATES_DISTRIBUTION);
         HttpResponse response = httpClient.execute(get);
 
