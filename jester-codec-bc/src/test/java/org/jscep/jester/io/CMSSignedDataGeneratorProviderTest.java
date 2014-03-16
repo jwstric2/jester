@@ -6,16 +6,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-public class CMSSignedDataGeneratorProducerTest {
-    private CMSSignedDataGeneratorProducer producer;
+public class CMSSignedDataGeneratorProviderTest {
+    private CMSSignedDataGeneratorProvider producer;
 
     @Before
     public void setUp() {
-        producer = new CMSSignedDataGeneratorProducer();
+        producer = new CMSSignedDataGeneratorProvider();
     }
 
     @Test
     public void testCreateCMSSignedDataGenerator() {
-        assertThat(producer.createCMSSignedDataGenerator(), isA(CMSSignedDataGenerator.class));
+        assertThat(producer.get(), isA(CMSSignedDataGenerator.class));
     }
 }

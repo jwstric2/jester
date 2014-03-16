@@ -5,6 +5,7 @@ import org.jscep.jester.EstMediator;
 import org.jscep.jester.io.EntityEncoder;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.cert.X509Certificate;
 
-@WebServlet(urlPatterns = {"/cacerts"})
+@Singleton
 public class CaDistributionServlet extends HttpServlet {
     public static final String APPLICATION_PKCS7_MIME = "application/pkcs7-mime";
     @Inject
