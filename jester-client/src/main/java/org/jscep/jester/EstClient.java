@@ -85,8 +85,13 @@ public class EstClient {
 
     private EnrollmentResponse enroll(CertificationRequest csr, String command) throws IOException {
         HttpPost post = new HttpPost("https://" + host + WELL_KNOWN_LOCATION + command);
+        post.addHeader("Content-Type", "application/pkcs10");
+        post.addHeader("Content-Transfer-Encoding", "base64");
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
-        csrEncoder.encode(new Base64OutputStream(bOut), csr);
+        Base64OutputStream base64Out = new Base64OutputStream(bOut);
+        csrEncoder.encode(base64Out, csr);
+        base64Out.flush();
+        base64Out.close();
         post.setEntity(new ByteArrayEntity(bOut.toByteArray()));
         HttpResponse response = httpClient.execute(post);
 

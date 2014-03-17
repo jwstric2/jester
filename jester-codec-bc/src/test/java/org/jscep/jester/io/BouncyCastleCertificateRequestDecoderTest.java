@@ -6,6 +6,7 @@ import org.bouncycastle.cms.CMSException;
 import org.bouncycastle.cms.CMSSignedData;
 import org.bouncycastle.cms.CMSSignedDataGenerator;
 import org.bouncycastle.cms.CMSTypedData;
+import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 import org.bouncycastle.util.Store;
 import org.bouncycastle.util.encoders.Base64;
@@ -17,6 +18,7 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.security.KeyStore;
 import java.security.cert.X509Certificate;
 import java.util.Collection;
@@ -34,7 +36,7 @@ public class BouncyCastleCertificateRequestDecoderTest {
         decoder = new BouncyCastleCertificateRequestDecoder();
     }
 
-    @Test(expected = IOException.class)
+    @Test(expected = NullPointerException.class)
     public void testInvalidContent() throws IOException {
         ByteArrayInputStream bIn = new ByteArrayInputStream(new byte[0]);
         decoder.decode(bIn);
@@ -42,7 +44,9 @@ public class BouncyCastleCertificateRequestDecoderTest {
 
     @Test
     public void testIsCertificationRequest() throws IOException {
-        CertificationRequest csr = decoder.decode(getClass().getResourceAsStream("/jester.p10"));
+        PEMParser parser = new PEMParser(new InputStreamReader(getClass().getResourceAsStream("/jester.p10")));
+        PKCS10CertificationRequest expected = (PKCS10CertificationRequest) parser.readObject();
+        CertificationRequest csr = decoder.decode(new ByteArrayInputStream(expected.getEncoded()));
         PKCS10CertificationRequest pkcs10 = new PKCS10CertificationRequest(csr.getBytes());
 
         assertThat(pkcs10.getSubject().toString(), containsString("Jester"));

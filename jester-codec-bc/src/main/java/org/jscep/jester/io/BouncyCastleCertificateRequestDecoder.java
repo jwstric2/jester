@@ -1,5 +1,6 @@
 package org.jscep.jester.io;
 
+import org.apache.commons.io.IOUtils;
 import org.bouncycastle.jce.provider.PEMUtil;
 import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.pkcs.PKCS10CertificationRequest;
@@ -12,8 +13,7 @@ import java.io.InputStreamReader;
 public class BouncyCastleCertificateRequestDecoder implements EntityDecoder<CertificationRequest> {
     @Override
     public CertificationRequest decode(InputStream in) throws IOException {
-        PEMParser parser = new PEMParser(new InputStreamReader(in));
-        PKCS10CertificationRequest csr = (PKCS10CertificationRequest) parser.readObject();
+        PKCS10CertificationRequest csr = new PKCS10CertificationRequest(IOUtils.toByteArray(in));
         if (csr == null) {
             throw new IOException("Failed to parse CSR");
         }

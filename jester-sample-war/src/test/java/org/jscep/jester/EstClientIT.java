@@ -25,10 +25,25 @@ public class EstClientIT {
         EstClient estClient = new EstClient(httpClient, new BouncyCastleSignedDataDecoder(), new EntityEncoder<CertificationRequest>() {
             @Override
             public void encode(OutputStream out, CertificationRequest... entity) throws IOException {
-                
+               out.write(entity[0].getBytes()); 
             }
         }, "localhost:8443");
         assertNotNull(estClient.obtainCaCertificates());
+        estClient.enroll(getCertificationRequest());
+    }
+    
+    private CertificationRequest getCertificationRequest() {
+        final PEMParser parser = new PEMParser(new InputStreamReader(getClass().getResourceAsStream("/jester.p10")));
+        return new CertificationRequest() {
+            @Override
+            public byte[] getBytes() {
+                try {
+                    return ((PKCS10CertificationRequest) parser.readObject()).getEncoded();
+                } catch (IOException ioe) {
+                    throw new RuntimeException(ioe);
+                }
+            }
+        };
     }
 
     private HttpClient getNewHttpClient() throws Exception {

@@ -50,7 +50,7 @@ public class EnrollmentServletTest {
 
         servlet.doPost(request, response);
 
-        verify(response).setContentType(EnrollmentServlet.APPLICATION_PKCS7_MIME_SMIME_CERTS_ONLY);
+        verify(response).setContentType(EnrollmentServlet.APPLICATION_PKCS7_MIME);
     }
 
     @Test
