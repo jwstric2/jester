@@ -21,8 +21,11 @@ mvn jetty:run
 
 You should now have a functioning EST server at: [https://localhost:8443/.well-known/est/](https://localhost:8443/.well-known/est/).
 
-Using OpenSSL
--------------
+Testing Jester with OpenSSL
+---------------------------
+
+CA Distribution
+===============
 
 You should be able to download the CA store at [https://localhost:8443/.well-known/est/cacerts](https://localhost:8443/.well-known/est/cacerts) and parse it with OpenSSL, like so:
 
@@ -84,6 +87,17 @@ Certificate:
         3c:4a:0b:d9:2e:49:80:76:5d:aa:d8:39:f7:df:bd:71:f2:6f:
         ad:7c:71:d2:41:48:f2:13:80:69:19:18:85:c6:e1:0f:fe:84:
         36:06:a2:cc
+```
+
+Certificate Enrollment
+======================
+
+```bash
+openssl req -inform PEM -outform DER -in src/main/resources/jester.p10 \
+  | base64 \
+  | curl --insecure -v -d @- https://localhost:8443/.well-known/est/simpleenroll \
+  | base64 --decode \
+  | openssl pkcs7 -inform DER -print_certs -text -noout
 ```
 
 Related Documents
