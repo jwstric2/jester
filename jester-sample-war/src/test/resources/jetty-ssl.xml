@@ -8,10 +8,10 @@
 <!-- ============================================================= -->
 <Configure id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory">
     <Set name="KeyStorePath"><Property name="jetty.base" default="." />/<Property name="jetty.keystore" default="src/test/resources/jetty.jks"/></Set>
-    <Set name="KeyStorePassword"><Property name="jetty.keystore.password" default="changeit"/></Set>
-    <Set name="KeyManagerPassword"><Property name="jetty.keymanager.password" default="changeit"/></Set>
+    <Set name="KeyStorePassword"><Property name="jetty.keystore.password" default="jetty"/></Set>
+    <Set name="KeyManagerPassword"><Property name="jetty.keymanager.password" default="jetty"/></Set>
     <Set name="TrustStorePath"><Property name="jetty.base" default="." />/<Property name="jetty.truststore" default="src/test/resources/jetty.jks"/></Set>
-    <Set name="TrustStorePassword"><Property name="jetty.truststore.password" default="changeit"/></Set>
+    <Set name="TrustStorePassword"><Property name="jetty.truststore.password" default="jetty"/></Set>
     <Set name="EndpointIdentificationAlgorithm"></Set>
     <Set name="ExcludeCipherSuites">
         <Array type="String">
