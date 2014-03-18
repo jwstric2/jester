@@ -114,8 +114,8 @@ public class EstClient {
     }
 
     private String buildUrl(String command) {
-        if (label != null) {
-            return "https://" + host + WELL_KNOWN_LOCATION + label + "/" + command;
+        if (caLabel != null) {
+            return "https://" + host + WELL_KNOWN_LOCATION + caLabel + "/" + command;
         } else {
             return "https://" + host + WELL_KNOWN_LOCATION + command;
         }
