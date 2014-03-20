@@ -25,11 +25,11 @@ You should now have a functioning EST server at: [https://localhost:8443/.well-k
 
 ### CA Distribution
 
-You should be able to download the CA store at [https://localhost:8443/.well-known/est/cacerts](https://localhost:8443/.well-known/est/cacerts) and parse it with OpenSSL, like so:
+You should be able to retrieve the CA certificates at [https://localhost:8443/.well-known/est/cacerts](https://localhost:8443/.well-known/est/cacerts) and parse it with OpenSSL, like so:
 
 ```bash
 curl --insecure --silent https://localhost:8443/.well-known/est/cacerts \
-  | base64 --decode \
+  | base64 --decode -i \
   | openssl pkcs7 -inform DER -print_certs -text -noout
 ```
 
@@ -95,7 +95,7 @@ Send a PKCS #10 certificate signing request to Jester, and read back the resulti
 openssl req -inform PEM -outform DER -in src/main/resources/jester.p10 \
   | base64 \
   | curl --insecure --silent -d @- https://localhost:8443/.well-known/est/simpleenroll \
-  | base64 --decode \
+  | base64 --decode -i \
   | openssl pkcs7 -inform DER -print_certs -text -noout
 ```
 
