@@ -21,26 +21,28 @@ import java.util.Arrays;
 
 public class EstClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(EstClient.class);
-    public static final String WELL_KNOWN_LOCATION = "/.well-known/est";
-    private static final String CA_CERTIFICATES_DISTRIBUTION = "/cacerts";
-    private static final String SIMPLE_ENROLL = "/simpleenroll";
-    private static final String SIMPLE_RENEW = "/simplereenroll";
+    public static final String WELL_KNOWN_LOCATION = "/.well-known/est/";
+    private static final String CA_CERTIFICATES_DISTRIBUTION = "cacerts";
+    private static final String SIMPLE_ENROLL = "simpleenroll";
+    private static final String SIMPLE_RENEW = "simplereenroll";
     private String host;
+    private String caLabel;
     private HttpClient httpClient;
     private EntityDecoder<X509Certificate[]> certDecoder;
     private EntityEncoder<CertificationRequest> csrEncoder;
     private final KeyStore trustStore;
 
     public EstClient(HttpClient httpClient, EntityDecoder<X509Certificate[]> certDecoder, EntityEncoder<CertificationRequest> csrEncoder, String host) {
-        this.host = host;
-        this.certDecoder = certDecoder;
-        this.csrEncoder = csrEncoder;
-        this.httpClient = httpClient;
-        this.trustStore = null;
+        this(httpClient, certDecoder, csrEncoder, host, null);
     }
 
-    public EstClient(HttpClient httpClient, EntityDecoder<X509Certificate[]> certDecoder, EntityEncoder<CertificationRequest> csrEncoder, String host, KeyStore explicitCaDatabase) {
+    public EstClient(HttpClient httpClient, EntityDecoder<X509Certificate[]> certDecoder, EntityEncoder<CertificationRequest> csrEncoder, String host, String label) {
+        this(httpClient, certDecoder, csrEncoder, host, null, null);
+    }
+
+    public EstClient(HttpClient httpClient, EntityDecoder<X509Certificate[]> certDecoder, EntityEncoder<CertificationRequest> csrEncoder, String host, String caLabel, KeyStore explicitCaDatabase) {
         this.host = host;
+        this.caLabel = caLabel;
         this.certDecoder = certDecoder;
         this.csrEncoder = csrEncoder;
         this.httpClient = httpClient;
@@ -48,7 +50,7 @@ public class EstClient {
     }
 
     public X509Certificate[] obtainCaCertificates() throws IOException {
-        HttpGet get = new HttpGet("https://" + host + WELL_KNOWN_LOCATION + CA_CERTIFICATES_DISTRIBUTION);
+        HttpGet get = new HttpGet(buildUrl(CA_CERTIFICATES_DISTRIBUTION));
         HttpResponse response = httpClient.execute(get);
 
         int statusCode = response.getStatusLine().getStatusCode();
@@ -84,7 +86,7 @@ public class EstClient {
     }
 
     private EnrollmentResponse enroll(CertificationRequest csr, String command) throws IOException {
-        HttpPost post = new HttpPost("https://" + host + WELL_KNOWN_LOCATION + command);
+        HttpPost post = new HttpPost(buildUrl(command));
         post.addHeader("Content-Type", "application/pkcs10");
         post.addHeader("Content-Transfer-Encoding", "base64");
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
@@ -108,6 +110,14 @@ public class EstClient {
         } else {
             String retryAfter = response.getFirstHeader("Retry-After").getValue();
             return new EnrollmentResponse(RetryAfterParser.parse(retryAfter));
+        }
+    }
+
+    private String buildUrl(String command) {
+        if (caLabel != null) {
+            return "https://" + host + WELL_KNOWN_LOCATION + caLabel + "/" + command;
+        } else {
+            return "https://" + host + WELL_KNOWN_LOCATION + command;
         }
     }
 
