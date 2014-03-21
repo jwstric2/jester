@@ -49,7 +49,7 @@ public class EstClientIT {
     private HttpClient getNewHttpClient() throws Exception {
         SSLContextBuilder builder = new SSLContextBuilder();
         builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(), new AllowAllHostnameVerifier());
+        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(), new StrictHostnameVerifier());
         return HttpClients.custom().setSSLSocketFactory(sslsf).build();
 
     }
