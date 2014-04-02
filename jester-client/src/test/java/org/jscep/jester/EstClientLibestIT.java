@@ -26,19 +26,23 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Arrays;
 
+/**
+ * Test again libest (https://github.com/cisco/libest)
+ * 
+ * See http://ec2-54-204-91-178.compute-1.amazonaws.com/
+ */
 public class EstClientLibestIT {
     @Test
     public void testObtainCaCertificates() throws IOException, Exception {
-        HttpClient httpClient = httpClient();
-        EstClient estClient = new EstClient(httpClient, new BouncyCastleSignedDataDecoder(), new EntityEncoder<CertificationRequest>() {
+        EstClient estClient = new EstClient(httpClient(), new BouncyCastleSignedDataDecoder(), new EntityEncoder<CertificationRequest>() {
             @Override
             public void encode(OutputStream out, CertificationRequest... entity) throws IOException {
                out.write(entity[0].getBytes()); 
             }
         }, "ec2-54-204-91-178.compute-1.amazonaws.com:8443");
         X509Certificate[] explicitTaDatabase = estClient.obtainCaCertificates(); // 4.1.1
-        estClient.enroll(getCertificationRequest());
     }
     
     private CertificationRequest getCertificationRequest() {
@@ -47,7 +51,10 @@ public class EstClientLibestIT {
             @Override
             public byte[] getBytes() {
                 try {
-                    return ((PKCS10CertificationRequest) parser.readObject()).getEncoded();
+                    byte[] bytes = ((PKCS10CertificationRequest) parser.readObject()).getEncoded();
+                    System.out.println(Arrays.toString(bytes));
+                    
+                    return bytes;
                 } catch (IOException ioe) {
                     throw new RuntimeException(ioe);
                 }
